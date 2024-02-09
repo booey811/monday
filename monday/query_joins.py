@@ -261,17 +261,28 @@ def add_file_to_column_query(item_id, column_id):
 
 
 # UPDATE RESOURCE QUERIES
-def create_update_query(item_id, update_value):
-    query = '''mutation
-        {
-            create_update(
-                item_id: %s,
-                body: %s
-            ) {
-                id
-            }
-        }''' % (item_id, json.dumps(update_value))
-
+def create_update_query(item_id, update_value, thread_id=None):
+    if thread_id:
+        query = '''mutation
+            {
+                create_update(
+                    item_id: %s,
+                    body: %s,
+                    parent_id: %s
+                ) {
+                    id
+                }
+            }''' % (item_id, json.dumps(update_value), thread_id)
+    else:
+        query = '''mutation
+            {
+                create_update(
+                    item_id: %s,
+                    body: %s
+                ) {
+                    id
+                }
+            }''' % (item_id, json.dumps(update_value))
     return query
 
 

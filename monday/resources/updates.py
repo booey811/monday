@@ -3,8 +3,8 @@ from monday.resources.base import BaseResource
 
 
 class UpdateResource(BaseResource):
-    def create_update(self, item_id, update_value):
-        query = create_update_query(item_id, update_value)
+    def create_update(self, item_id, update_value, thread_id=None):
+        query = create_update_query(item_id, update_value, thread_id)
         return self.client.execute(query)
 
     def delete_update(self, item_id):
