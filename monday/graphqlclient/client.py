@@ -1,7 +1,5 @@
 import json
 
-import requests
-
 from monday.exceptions import MondayQueryError
 
 TOKEN_HEADER = 'Authorization'
@@ -23,6 +21,7 @@ class GraphQLClient:
         self.headers = headers
 
     def _send(self, query, variables):
+        import requests
         payload = {'query': query}
         headers = self.headers.copy()
         files = None
