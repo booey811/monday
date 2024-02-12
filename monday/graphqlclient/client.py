@@ -1,7 +1,5 @@
 import json
 
-import requests
-
 from monday.exceptions import MondayQueryError
 
 TOKEN_HEADER = 'Authorization'
