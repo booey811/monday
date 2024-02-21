@@ -1,6 +1,6 @@
 from monday.query_joins import mutate_item_query, get_item_query, update_item_query, get_item_by_id_query, \
     update_multiple_column_values_query, mutate_subitem_query, add_file_to_column_query, delete_item_query, \
-    archive_item_query, move_item_to_group_query
+    archive_item_query, move_item_to_group_query, get_subitems_query
 from monday.resources.base import BaseResource
 
 
@@ -48,4 +48,8 @@ class ItemResource(BaseResource):
     
     def delete_item_by_id(self, item_id):
         query = delete_item_query(item_id)
+        return self.client.execute(query)
+
+    def fetch_subitems(self, parent_item_id):
+        query = get_subitems_query(parent_item_id)
         return self.client.execute(query)
