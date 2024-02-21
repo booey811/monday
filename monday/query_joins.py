@@ -748,3 +748,21 @@ def get_me_query():
         }
     }"""
     return query
+
+
+def get_subitems_query(parent_item_id):
+    query = '''query
+        {
+            items (ids: %s) {
+                subitems {
+                    id
+                    name
+                    column_values {
+                        id
+                        text
+                        value
+                    }                
+                }
+            }
+        }''' % parent_item_id
+    return query
