@@ -766,3 +766,22 @@ def get_subitems_query(parent_item_id):
             }
         }''' % parent_item_id
     return query
+
+
+def create_column_in_board(board_id, title, column_type, description):
+    # List of acceptable types 2023-04-17:
+    # https://asset.cloudinary.com/monday-platform-dev/cde9c7ca84b78ec7dde46cc5c8588946
+    query = '''mutation 
+        {
+          create_column (
+            board_id:    %s, 
+            title:       "%s", 
+            description: "%s", 
+            column_type: %s
+        ) {
+            id
+            title
+            description
+          }
+        }''' % (board_id, title, description, column_type)
+    return query
