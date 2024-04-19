@@ -1,7 +1,7 @@
 from typing import List, Optional, Union, Any, Mapping
 
 from monday.query_joins import get_boards_query, get_boards_by_id_query, get_board_items_query, \
-    get_columns_by_board_query, create_board_by_workspace_query, duplicate_board_query
+    get_columns_by_board_query, create_board_by_workspace_query, duplicate_board_query, create_column_in_board
 from monday.resources.base import BaseResource
 from monday.resources.types import BoardKind, BoardState, BoardsOrderBy, DuplicateType
 
@@ -34,4 +34,8 @@ class BoardResource(BaseResource):
                         folder_id: Optional[int] = None, keep_subscribers: Optional[bool] = None,
                         workspace_id: Optional[int] = None):
         query = duplicate_board_query(board_id, duplicate_type, board_name, workspace_id, folder_id, keep_subscribers)
+        return self.client.execute(query)
+
+    def create_column(self, board_id: int, title: str, column_type: str, description: Optional[str] = "No Description",):
+        query = create_column_in_board(board_id, title, column_type, description)
         return self.client.execute(query)
